@@ -1,8 +1,7 @@
 ---
 - name: Install WordPress, MariaDB, Nginx, and PHP-FPM
   hosts: all
-  #remote_user: centos
-  remote_user: '{{ os_user }}'
+  remote_user: centos
   become: yes
   become_user: root
 
