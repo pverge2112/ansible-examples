@@ -8,10 +8,12 @@
   # remote_user: user
   # sudo: yes
   vars:
-    heat_callback_url: "{{ callback }}"
+    heat_endpoint: "{{ heat_endpoint }}"
+    heat_token: "{{ heat_token }}"
 
   tasks:
-    - command echo "{{ heat_callback_url }}"
+    - command echo "{{ heat_endpoint }}"
+    - command echo "{{ heat_token }}"
 
   roles:
     - common
