@@ -7,6 +7,11 @@
 
   # remote_user: user
   # sudo: yes
+  vars:
+    heat_callback_url: "{{ callback }}"
+
+  tasks:
+    - command echo "{{ heat_callback_url }}"
 
   roles:
     - common
