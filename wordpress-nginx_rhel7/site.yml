@@ -12,8 +12,11 @@
     heat_token: "{{ HEAT_TOKEN|default('foo') }}"
 
   tasks:
-    - command echo "{{ heat_endpoint }}"
-    - command echo "{{ heat_token }}"
+    - name: echo $heat_endpoint
+    action: command echo $heat_endpoint
+
+    - name: echo $heat_token
+    action: command echo $heat_token
 
   roles:
     - common
