@@ -12,8 +12,11 @@
     heat_token: "{{ HEAT_TOKEN|default('foo') }}"
 
   tasks:
-    - command: echo "{{ heat_endpoint }}"
-    - command: echo "{{ heat_token }}"
+    debug: msg="{{ heat_endpoint }}"
+    debug: msg="{{ heat_token }}"
+
+    #- command: echo "{{ heat_endpoint }}"
+    #- command: echo "{{ heat_token }}"
 
   roles:
     - common
