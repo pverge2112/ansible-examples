@@ -14,7 +14,7 @@
       force_basic_auth: yes
       status_code: 201
       body_format: json
-rescue:
+  rescue:
   - name: curl post to Heat to notify of failure
   uri:
     url: "{{ heat_endpoint }}"
