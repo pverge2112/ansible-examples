@@ -7,7 +7,8 @@
     url: "{{ heat_endpoint }}"
     method: POST
     Header_X-Auth-Token: "{{ heat_token }}"
-    Header_Content-Type:: application/json
+    Header_Content-Type: application/json
+    Header_Accept: application/json
     body: '{"status": "SUCCESS"}'
     #force_basic_auth: yes
     status_code: 201
