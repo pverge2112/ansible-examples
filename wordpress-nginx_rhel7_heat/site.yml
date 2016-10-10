@@ -7,9 +7,9 @@
 
   # remote_user: user
   # sudo: yes
-  #vars:
-  #  heat_endpoint: "{{ HEAT_ENDPOINT|default('foo') }}"
-  #  heat_token: "{{ HEAT_TOKEN|default('foo') }}"
+  vars:
+    heat_endpoint: "{{ HEAT_ENDPOINT|default('foo') }}"
+    heat_token: "{{ HEAT_TOKEN|default('foo') }}"
 
   #tasks:
   #  - debug: msg="{{ heat_endpoint }}"
@@ -24,3 +24,4 @@
     - nginx
     - php-fpm
     - wordpress
+    - heat
