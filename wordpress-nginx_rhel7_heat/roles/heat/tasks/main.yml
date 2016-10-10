@@ -1,6 +1,6 @@
 ---
 - name: curl post to Heat
-  command: curl -i -X POST -H 'X-Auth-Token: "{{ heat_token }}"' -H 'Content-Type: application/json' -H 'Accept: application/json' "{{ heat_endpoint }}" --data-binary '{"status": "SUCCESS"}'
+  command: /usr/bin/curl -i -X POST -H 'X-Auth-Token: "{{ heat_token }}"' -H 'Content-Type: application/json' -H 'Accept: application/json' "{{ heat_endpoint }}" --data-binary '{"status": "SUCCESS"}'
 #  uri:
 #    url: "{{ heat_endpoint }}"
 #    method: POST
