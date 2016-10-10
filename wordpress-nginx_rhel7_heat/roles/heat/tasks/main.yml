@@ -2,9 +2,9 @@
 - name: curl post to Heat
   #shell: curl -i -X POST -H 'X-Auth-Token: "{{heat_token}}"' -H 'Content-Type: application/json' -H 'Accept: application/json' "{{heat_endpoint}}" --data-binary '{\"status\": \"SUCCESS\"}'
   uri:
-    url: {{ heat_endpoint }}
+    url: "{{ heat_endpoint }}"
     method: POST
-    Header_X-Auth-Token: {{ heat_token }}
+    Header_X-Auth-Token: "{{ heat_token }}"
     Header_Content-Type:: application/json
     body: {"status": "SUCCESS"}
     #force_basic_auth: yes
