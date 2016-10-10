@@ -16,13 +16,13 @@
       body_format: json
   rescue:
   - name: curl post to Heat to notify of failure
-  uri:
-    url: "{{ heat_endpoint }}"
-    method: POST
-    HEADER_X-Auth-Token: "{{ heat_token }}"
-    HEADER_Content-Type: "application/json"
-    HEADER_Accept: "application/json"
-    body: '{"status": "FAILURE"}'
-    force_basic_auth: yes
-    status_code: 200
-    body_format: json
+    uri:
+      url: "{{ heat_endpoint }}"
+      method: POST
+      HEADER_X-Auth-Token: "{{ heat_token }}"
+      HEADER_Content-Type: "application/json"
+      HEADER_Accept: "application/json"
+      body: '{"status": "FAILURE"}'
+      force_basic_auth: yes
+      status_code: 200
+      body_format: json
