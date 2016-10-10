@@ -19,9 +19,9 @@
     #- command: echo "{{ heat_token }}"
 
   roles:
-    - common
-    - mariadb
-    - nginx
-    - php-fpm
-    - wordpress
+#    - common
+#    - mariadb
+#    - nginx
+#    - php-fpm
+#    - wordpress
     - heat
