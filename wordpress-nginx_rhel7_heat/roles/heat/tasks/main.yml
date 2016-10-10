@@ -7,7 +7,7 @@
     uri:
       url: "{{ heat_endpoint }}"
       method: POST
-      #HEADER_X-Auth-Token: "{{ heat_token }}"
+      HEADER_X-Auth-Token: "{{ heat_token }}"
       HEADER_Content-Type: "application/json"
       HEADER_Accept: "application/json"
       body: '{"status": "SUCCESS"}'
