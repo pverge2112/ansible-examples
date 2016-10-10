@@ -1,15 +1,28 @@
 ---
-- name: curl post to Heat
-  #shell: /usr/bin/curl -i -X POST -H 'X-Auth-Token: "{{ heat_token }}"' -H 'Content-Type: application/json' -H 'Accept: application/json' "{{ heat_endpoint }}" --data-binary '{"status": "SUCCESS"}'
-  #args:
-  #  executable: /bin/bash
+- block:
+  - name: curl post to Heat
+    #shell: /usr/bin/curl -i -X POST -H 'X-Auth-Token: "{{ heat_token }}"' -H 'Content-Type: application/json' -H 'Accept: application/json' "{{ heat_endpoint }}" --data-binary '{"status": "SUCCESS"}'
+    #args:
+    #  executable: /bin/bash
+    uri:
+      url: "{{ heat_endpoint }}"
+      method: POST
+      HEADER_X-Auth-Token: "{{ heat_token }}"
+      HEADER_Content-Type: "application/json"
+      HEADER_Accept: "application/json"
+      body: '{"status": "SUCCESS"}'
+      force_basic_auth: yes
+      status_code: 201
+      body_format: json
+rescue:
+  - name: curl post to Heat to notify of failure
   uri:
     url: "{{ heat_endpoint }}"
     method: POST
     HEADER_X-Auth-Token: "{{ heat_token }}"
     HEADER_Content-Type: "application/json"
     HEADER_Accept: "application/json"
-    body: '{"status": "SUCCESS"}'
+    body: '{"status": "FAILURE"}'
     force_basic_auth: yes
     status_code: 200
     body_format: json

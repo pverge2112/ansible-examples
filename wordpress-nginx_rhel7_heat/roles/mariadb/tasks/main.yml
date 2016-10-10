@@ -1,27 +1,54 @@
 ---
 # This playbook will install MariaDB and create db user and give permissions.
 
-- name: Install MariaDB package
-  yum: name={{ item }} state=installed
-  with_items:
-   - mariadb-server
-   - MySQL-python
-   - libselinux-python
-   - libsemanage-python
+- block:
+  - name: Install MariaDB package
+    yum: name={{ item }} state=installed
+    with_items:
+     - mariadb-server
+     - MySQL-python
+     - libselinux-python
+     - libsemanage-python
 
-- name: Configure SELinux to start mysql on any port
-  seboolean: name=mysql_connect_any state=true persistent=yes
+  - name: Install firewalld
+    yum: name={{ item }} state=installed
+    with_items:
+     - firewalld
 
-- name: Create Mysql configuration file
-  template: src=my.cnf.j2 dest=/etc/my.cnf
-  notify: 
-  - restart mariadb
+  - name: Enable firewalld
+    systemd:
+      name: firewalld
+      enabled: yes
+      masked: no
+
+  - name: Start firewalld
+    systemd: state=started name=firewalld
+
+  - name: Configure SELinux to start mysql on any port
+    seboolean: name=mysql_connect_any state=true persistent=yes
+
+  - name: Create Mysql configuration file
+    template: src=my.cnf.j2 dest=/etc/my.cnf
+    notify: 
+    - restart mariadb
   
-- name: Create MariaDB log file
-  file: path=/var/log/mysqld.log state=touch owner=mysql group=mysql mode=0775
+  - name: Create MariaDB log file
+    file: path=/var/log/mysqld.log state=touch owner=mysql group=mysql mode=0775
   
-- name: Start MariaDB Service
-  service: name=mariadb state=started enabled=yes
+  - name: Start MariaDB Service
+    service: name=mariadb state=started enabled=yes
 
-- name: insert firewalld rule
-  firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
+  - name: insert firewalld rule
+    firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
+rescue:
+  - name: curl post to Heat to notify of failure
+  uri:
+    url: "{{ heat_endpoint }}"
+    method: POST
+    HEADER_X-Auth-Token: "{{ heat_token }}"
+    HEADER_Content-Type: "application/json"
+    HEADER_Accept: "application/json"
+    body: '{"status": "FAILURE"}'
+    force_basic_auth: yes
+    status_code: 200
+    body_format: json
