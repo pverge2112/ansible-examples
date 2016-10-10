@@ -11,5 +11,5 @@
     HEADER_Accept: "application/json"
     body: '{"status": "SUCCESS"}'
     force_basic_auth: yes
-    status_code: 201
+    status_code: 200
     body_format: json
