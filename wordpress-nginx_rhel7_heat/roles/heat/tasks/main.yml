@@ -10,6 +10,6 @@
     Header_Content-Type: application/json
     Header_Accept: application/json
     body: '{"status": "SUCCESS"}'
-    #force_basic_auth: yes
+    force_basic_auth: yes
     status_code: 201
     body_format: json
