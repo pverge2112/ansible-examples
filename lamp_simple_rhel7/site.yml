@@ -9,7 +9,7 @@
     - common
 
 - name: configure and deploy the webservers and application code
-  hosts: client1.lab.com
+  hosts: all
   remote_user: root
 
   roles:
