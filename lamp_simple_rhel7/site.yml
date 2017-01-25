@@ -9,14 +9,14 @@
     - common
 
 - name: configure and deploy the webservers and application code
-  hosts: all
+  hosts: client1.lab.com
   remote_user: root
 
   roles:
     - web
 
 - name: deploy MySQL and configure the databases
-  hosts: all
+  hosts: client1.lab.com
   remote_user: root
 
   roles:
